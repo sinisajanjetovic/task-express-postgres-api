@@ -1,4 +1,4 @@
-const { Pool, Client } = require("pg");
+const { Pool } = require("pg");
 
 const pool = new Pool({
   user: "user",
@@ -8,33 +8,18 @@ const pool = new Pool({
   port: 5432,
 });
 
-const carModel = `
-DROP TABLE carModel;
-`;
-
-const car = `
-DROP TABLE car;
-`;
-
-const garage = `
+// DROP TABLE carModel CASCADE;
+// DROP TABLE car CASCADE;
+// DROP TABLE garage;
+const tables = `
+DROP TABLE carModel CASCADE;
+DROP TABLE car CASCADE;
 DROP TABLE garage;
 `;
 
-const dropCarModel = pool.query(carModel, (err, res) => {
+const dropTables = pool.query(tables, (err, res) => {
   console.log(err, res);
   // pool.end();
 });
 
-const dropCar = pool.query(car, (err, res) => {
-  console.log(err, res);
-  // pool.end();
-});
-
-const dropGarage = pool.query(garage, (err, res) => {
-  console.log(err, res);
-  // pool.end();
-});
-
-exports.dropCarModel = dropCarModel;
-exports.dropCar = dropCar;
-exports.dropGarage = dropGarage;
+exports.dropTables = dropTables;

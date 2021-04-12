@@ -8,7 +8,7 @@ const router = new Router();
 // CREATE - create new
 router.post("/", async (request, response, next) => {
   try {
-    const { address, licencePlate} = request.body;
+    const { address, licencePlate } = request.body;
     if (!address || !licencePlate) {
       return response.status(400).json({
         message: "Address and Licence Plate must be provided",
@@ -38,16 +38,16 @@ router.get("/", async (request, response, next) => {
 
 //////////////////////
 // READ - find
-router.get("/:address", async (request, response, next) => {
+router.get("/:licencePlate", async (request, response, next) => {
   try {
-    const { address } = request.params;
-    const garage = await Garage.find(address);
+    const { licencePlate } = request.params;
+    const garage = await Garage.find(licencePlate);
     if (garage) {
       return response.status(200).json(garage);
     } else {
       return response
         .status(200)
-        .json({ message: "Garage with requested address not found" });
+        .json({ message: "Garage for requested car not found" });
     }
   } catch (error) {
     console.error(
@@ -57,21 +57,17 @@ router.get("/:address", async (request, response, next) => {
   response.status(500).json();
 });
 
-//////////////////////
-// UPDATE - garage
-router.patch("/:address", async (request, response, next) => {
+//////////////////////////
+// UPDATE - garage address
+router.patch("/:licencePlate", async (request, response, next) => {
   try {
     // const { address } = request.params;
-    const { address, licencePlate, productionYear } = request.body;
+    const { address, licencePlate } = request.body;
 
-    const findGarage = await Garage.find(address);
+    const findGarage = await Garage.find(licencePlate);
 
     if (findGarage) {
-      const updatedGarage = await Garage.update(
-        address,
-        licencePlate,
-        productionYear
-      );
+      const updatedGarage = await Garage.update(address, licencePlate);
 
       return response.status(200).json({ message: "Garage Updated" });
     } else {
@@ -90,21 +86,21 @@ router.patch("/:address", async (request, response, next) => {
 
 //////////////////////
 // DELETE - garage
-router.delete("/:address", async (request, response, next) => {
+router.delete("/:licencePlate", async (request, response, next) => {
   try {
-    const { address } = request.params;
-    const deleteGarage = await Garage.delete(address);
-    console.log(deleteGarage);
+    const { licencePlate } = request.params;
+    const deleteGarage = await Garage.delete(licencePlate);
     if (deleteGarage) {
       return response.status(200).json({ message: "Garage Deleted" });
     } else {
       return response.status(200).json({
-        message: "Requested Garage not found and it couldn't be deleted",
+        message:
+          "Garage for requested car not found and it couldn't be deleted",
       });
     }
   } catch (error) {
     console.error(
-      `Delete Garage({ address: ${request.body.address} }) >> Error: ${error.stack}`
+      `Delete Garage({ licencePlate: ${request.body.licencePlate} }) >> Error: ${error.stack}`
     );
   }
   response.status(500).json();

@@ -9,8 +9,8 @@ module.exports = {
   async create(model, color, productionYear) {
     try {
       const { rows } = await db.query(sql`
-      INSERT INTO carModel (id, model, color, productionYear)
-        VALUES (${uuidv4()},${model}, ${color},${productionYear})
+      INSERT INTO carModel (model, color, productionYear)
+        VALUES (${model}, ${color},${productionYear})
         RETURNING model;
         `);
 

@@ -9,8 +9,8 @@ module.exports = {
   async create(address, licencePlate) {
     try {
       const { rows } = await db.query(sql`
-      INSERT INTO garage (id, address, licencePlate)
-        VALUES (${uuidv4()},${address}, ${licencePlate})
+      INSERT INTO garage (address, licencePlate)
+        VALUES (${address}, ${licencePlate})
         RETURNING address;
         `);
 
@@ -33,11 +33,11 @@ module.exports = {
     return rows;
   },
 
-  //////////////////////
-  // READ - find
-  async find(address) {
+  ///////////////////////////////
+  // READ - find per licencePlate
+  async find(licencePlate) {
     const { rows } = await db.query(sql`
-    SELECT * FROM garage WHERE address=${address};
+    SELECT * FROM garage WHERE licencePlate=${licencePlate};
     `);
     return rows[0];
   },
@@ -46,16 +46,16 @@ module.exports = {
   // UPDATE - garage
   async update(address, licencePlate) {
     const { rows } = await db.query(sql`
-    UPDATE garage SET licencePlate=${licencePlate} WHERE address=${address} RETURNING *;
+    UPDATE garage SET address=${address} WHERE licencePlate=${licencePlate} RETURNING *;
     `);
     return rows[0];
   },
 
   //////////////////////
   // DELETE - garage
-  async delete(address) {
+  async delete(licencePlate) {
     const { rows } = await db.query(sql`
-    DELETE FROM garage WHERE address=${address} RETURNING *;
+    DELETE FROM garage WHERE licencePlate=${licencePlate} RETURNING *;
     `);
     return rows[0];
   },

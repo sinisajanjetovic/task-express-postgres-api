@@ -63,7 +63,7 @@ router.get("/:registrationNumber", async (request, response, next) => {
 // UPDATE - car
 router.patch("/:registrationNumber", async (request, response, next) => {
   try {
-    // const { carModel } = request.params;
+    // const { paramRegNumb } = request.params;
     const { registrationNumber, carModel, owner } = request.body;
 
     const findCar = await Car.find(registrationNumber);
@@ -107,29 +107,5 @@ router.delete("/:registrationNumber", async (request, response, next) => {
   }
   response.status(500).json();
 });
-
-//////////////////////
-// READ - find-my-car
-router.get(
-  "/find-my-car/:registrationNumber",
-  async (request, response, next) => {
-    try {
-      const { registrationNumber } = request.params;
-      const car = await Car.findMyCar(registrationNumber);
-      if (car) {
-        return response.status(200).json(car);
-      } else {
-        return response
-          .status(200)
-          .json({ message: "Requested Car not found" });
-      }
-    } catch (error) {
-      console.error(
-        `Find Car ({ car: ${request.body.registrationNumber} }) >> Error: ${error.stack}`
-      );
-    }
-    response.status(500).json();
-  }
-);
 
 module.exports = router;

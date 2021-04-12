@@ -10,8 +10,7 @@ const pool = new Pool({
 
 const tables = `
 CREATE TABLE IF NOT EXISTS carModel (
-    id uuid PRIMARY KEY,
-    model text UNIQUE,
+    model text PRIMARY KEY,
     color text,
     productionYear int
 );
@@ -19,8 +18,7 @@ CREATE TABLE IF NOT EXISTS carModel (
 CREATE INDEX carModel_model on carModel (model);
 
 CREATE TABLE IF NOT EXISTS car (
-  id uuid PRIMARY KEY,
-  registrationNumber text UNIQUE,
+  registrationNumber text PRIMARY KEY,
   carModel text,
   owner text,
   FOREIGN KEY (carModel) REFERENCES carModel(model) ON DELETE CASCADE
@@ -29,9 +27,8 @@ CREATE TABLE IF NOT EXISTS car (
   CREATE INDEX car_registrationNumber on car (registrationNumber);
   
   CREATE TABLE IF NOT EXISTS garage (
-    id uuid PRIMARY KEY,
     address text,
-    licencePlate text,
+    licencePlate text PRIMARY KEY,
     FOREIGN KEY (licencePlate) REFERENCES car(registrationNumber) ON DELETE CASCADE
   );
 
