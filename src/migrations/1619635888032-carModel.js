@@ -1,5 +1,3 @@
-/* eslint-disable camelcase */
-
 const db = require("../persistence/db");
 
 module.exports.up = async function (next) {
@@ -7,19 +5,12 @@ module.exports.up = async function (next) {
 
   await client.query(`
   CREATE TABLE IF NOT EXISTS carModel (
-    id uuid PRIMARY KEY,
-    model text,
+    model text PRIMARY KEY,
     color text,
-    productionYear int
-  );
+    productionYear int);
 
- `);
-
-  //   await client.query(`
-  //   CREATE INDEX carModels_model on carModels (model);
-
-  //   CREATE INDEX sessions_carModel on sessions (carModel_id);
-  //   `);
+    CREATE INDEX carModel_model on carModel (model);
+  `);
 
   await client.release(true);
   next();

@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const createTables = require(`./util/createTables`);
+// const createTables = require(`./util/createTables`);
 // const dropTables = require(`./util/dropTables`);
 
 const morgan = require("morgan");

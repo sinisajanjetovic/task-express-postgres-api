@@ -11,7 +11,6 @@
     "start": "node ./bin/start.js",
     "dev": "nodemon ./bin/start.js",
     "migrate": "node ./bin/migrate.js",
-    "migratefirst": "node-pg-migrate",
     "migrate:create": "migrate create --migrations-dir='./src/migrations'"
   },
   "keywords": [
@@ -28,7 +27,6 @@
     "helmet": "^4.4.1",
     "migrate": "^1.7.0",
     "morgan": "^1.10.0",
-    "node-pg-migrate": "^5.9.0",
     "pg": "^8.5.1",
     "postgres": "^1.0.2",
     "sql-template-strings": "^2.2.2",
