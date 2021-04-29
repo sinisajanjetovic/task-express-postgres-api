@@ -1,4 +1,6 @@
-1. Obrisan je folder "models", jer je nepotreban i ostao je tu greškom, jer sam u početku krenuo sa konceptom da je potrebno kreirati objekte
+1. Obrisani su folderi "models" i "util", jer su nepotrebni. 
+    "models" je ostao tu greškom, jer sam u početku krenuo sa konceptom da je potrebno kreirati objekte.
+    "util" je trebao dok nisam uspio da radim sa migracionim fajlovima, ali pošto je riješeno i to je pobrisano.
 
 2. Komanda "npm run migrate up" ne funkcioniše iz terminala proizvodi grešku koja je u MigrationError.jpg. Istovremeno, ova komanda funkcioniše iz Dockera CLI
 
